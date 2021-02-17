@@ -18,6 +18,11 @@ public class AsignaturaDAOImplement implements AsignaturaDAO{
 	
 	
 	
+	@Override
+	public List<AsignaturaDTO> buscaAsignaturaporIdNombreCursoTasa(Integer id, String nombre, Integer curso,
+			Double tasa) {
+		return asignaturaRepository.buscaAsignaturaporIdNombreCursoTasa(id, nombre, curso, tasa);
+	}
 	
 	
 	
@@ -65,6 +70,10 @@ public class AsignaturaDAOImplement implements AsignaturaDAO{
 		asignaturaRepository.deleteById(id);
 		return 1;
 	}
+
+
+
+
 	
 	
 	

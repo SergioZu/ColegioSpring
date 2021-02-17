@@ -35,9 +35,11 @@ public class AsignaturaController {
 	}
 	
 	@PostMapping(value = "listadoasignaturas")
-	public String controlador(@RequestParam(value = "id", required = false) Integer id, @RequestParam("nombre") String nombre, ModelMap model) {
+	public String controlador(@RequestParam(value = "id", required = false) Integer id, @RequestParam("nombre") String nombre,
+			 @RequestParam(value ="curso",required = false) Integer curso,  @RequestParam(value ="tasa",required = false) Double tasa,
+			 ModelMap model) {
 		
-		model.addAttribute("lista", asignaturaIml.obtenerAsignaturaporIdyNombre(id, nombre));
+		model.addAttribute("lista", asignaturaIml.buscaAsignaturaporIdNombreCursoTasa(id, nombre, curso, tasa));
 		return "vistas/asignaturas/listadoAsignaturas";
 	}
 	
