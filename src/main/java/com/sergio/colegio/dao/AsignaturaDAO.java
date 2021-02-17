@@ -1,11 +1,6 @@
 package com.sergio.colegio.dao;
 import java.util.List;
-
-import org.springframework.data.repository.query.Param;
-
 import com.sergio.colegio.dto.AsignaturaDTO;
-
-
 
 public interface AsignaturaDAO {
 		List<AsignaturaDTO> obtenerAsignaturaporIdyNombre(Integer id, String nombre);
@@ -13,6 +8,4 @@ public interface AsignaturaDAO {
 		Integer insertarasignatura(Integer id, String nombre, Integer curso, Double tasa);
 		Integer actualizarasignatura(Integer id, String nombre, Integer curso, Double tasa);
 		Integer eliminarasignatura(Integer id);
-	
-
 }

@@ -35,7 +35,7 @@ public class AlumnoController {
 	
 	@PostMapping(value = "listadoalumnos")
 	public String  ListarAlumnos(@RequestParam(value = "id",required = false) Integer id, @RequestParam("nombre") String nombre, ModelMap model) {
-		List<AlumnoDTO> listaAlumnos= alumnoRepository.buscaAlumnoporIDyNombre(id, nombre);
+		List<AlumnoDTO> listaAlumnos= alumnoRepository.buscaAlumnoporIdyNombre(id, nombre);
 		model.addAttribute("lista",listaAlumnos);
 		return "vistas/alumnos/listadoAlumnos";
 	}
@@ -70,7 +70,7 @@ public class AlumnoController {
 	
 	@PostMapping(value = "formularioborraralumnos")
 	public String  ListarAlumnosBorrar(@RequestParam(value = "id",required = false) Integer id, @RequestParam("nombre") String nombre, ModelMap model) {
-		List<AlumnoDTO> listaAlumnos= alumnoRepository.buscaAlumnoporIDyNombre(id, nombre);
+		List<AlumnoDTO> listaAlumnos= alumnoRepository.buscaAlumnoporIdyNombre(id, nombre);
 		model.addAttribute("lista",listaAlumnos);
 		return "vistas/alumnos/borrarAlumnos";
 	}
@@ -89,7 +89,7 @@ public class AlumnoController {
 	
 	@PostMapping(value = "formularioactualizaralumnos")
 	public String  ListarAlumnosActualizar(@RequestParam(value = "id",required = false) Integer id, @RequestParam("nombre") String nombre, ModelMap model) {
-		List<AlumnoDTO> listaAlumnos= alumnoRepository.buscaAlumnoporIDyNombre(id, nombre);
+		List<AlumnoDTO> listaAlumnos= alumnoRepository.buscaAlumnoporIdyNombre(id, nombre);
 		model.addAttribute("lista",listaAlumnos);
 		return "vistas/alumnos/actualizarAlumnos";
 	}
