@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 import com.sergio.colegio.dao.ComboDAO;
+import com.sergio.colegio.dao.NotasDAO;
+import com.sergio.colegio.dao.AlumnoDAO;
+import com.sergio.colegio.dao.AsignaturaDAO;
 import com.sergio.colegio.dto.NotaDTO;
-import com.sergio.colegio.entities.AlumnoEntity;
-import com.sergio.colegio.entities.AsignaturaEntity;
-import com.sergio.colegio.entities.NotaEntity;
 import com.sergio.colegio.repositorios.AlumnoRepository;
 import com.sergio.colegio.repositorios.AsignaturaRepository;
 import com.sergio.colegio.repositorios.NotaRepository;
@@ -27,13 +27,13 @@ public class NotasController {
 	private ComboDAO comboDao;
 	
 	@Autowired
-	private NotaRepository notasDAO;
+	private NotasDAO notasDAO;
 	
 	@Autowired
-	private AlumnoRepository alumnoDAO;
+	private AlumnoDAO alumnoDAO;
 	
 	@Autowired
-	private AsignaturaRepository asignaturaDAO;
+	private AsignaturaDAO asignaturaDAO;
 	
 	
 	
@@ -55,26 +55,21 @@ public class NotasController {
 	
 	
 	@GetMapping(value = "insertarnota")
-	public String ListarInsertarnotas(ModelMap model) {
+	public String listarInsertarnotas(ModelMap model) {
 		model.addAttribute("listaAlumnos",comboDao.comboAlumnos());
 		model.addAttribute("listaAsignaturas",comboDao.comboAsignaturas());
 		return "vistas/notas/insertarNotas";
 	}
 
 	@PostMapping(value = "insertarnota")
-	public String Insertarnota(
+	public String insertarNota(
 			@RequestParam(value = "alumnos", required = false) Integer alumno,
 			@RequestParam(value = "asignaturas", required = false) Integer asignatura,
 			@RequestParam(value = "nota", required = false) Double nota,
 			@RequestParam(value = "fecha", required = false) String fecha, ModelMap model) {
 		
-		AlumnoEntity alumnoEntity = alumnoDAO.findById(alumno).get();
-		AsignaturaEntity asignaturasEntity = asignaturaDAO.findById(asignatura).get();
+		model.addAttribute("resultado", asignaturaDAO.insertarasignatura(alumno, fecha, asignatura, nota));
 		
-		NotaEntity notas = new NotaEntity( alumnoEntity, asignaturasEntity, nota, fecha);
-
-		notasDAO.save(notas);
-
 		return "vistas/notas/insertarNotas";
 	}
 
@@ -84,7 +79,7 @@ public class NotasController {
 	
 	
 	@GetMapping(value = "formularioborrarnotas")
-	public String borrarnota(ModelMap model) {
+	public String borrarNota(ModelMap model) {
 		return "vistas/notas/borrarNotas";
 	}
 	
@@ -104,9 +99,9 @@ public class NotasController {
 	}
 	
 	@PostMapping(value = "borrarnota")
-	public String borrarnota(@RequestParam(value = "idNota", required = false) Integer id) {
+	public String borrarNota(@RequestParam(value = "idNota", required = false) Integer id, ModelMap model) {
 
-		notasDAO.deleteById(id);
+		model.addAttribute("resultado", notasDAO.eliminarnotas(id));
 
 		return "vistas/notas/borrarNotas";
 	}
@@ -137,18 +132,13 @@ public class NotasController {
 	}
 
 	@PostMapping(value = "actualizarnota")
-	public String actualizarnota(@RequestParam(value = "idNota", required = false) Integer id,
+	public String actualizarNota(@RequestParam(value = "idNota", required = false) Integer id,
 			@RequestParam(value = "alumnos", required = false) Integer alumno,
 			@RequestParam(value = "asignaturas", required = false) Integer asignatura,
 			@RequestParam(value = "nota", required = false) Double nota,
 			@RequestParam(value = "fecha", required = false) String fecha, ModelMap model) {
 		
-		AlumnoEntity alumnoEntity = alumnoDAO.findById(alumno).get();
-		AsignaturaEntity asignaturasEntity = asignaturaDAO.findById(asignatura).get();
-		
-		NotaEntity notas = new NotaEntity( id, alumnoEntity, asignaturasEntity, nota, fecha);
-
-		notasDAO.save(notas);
+		model.addAttribute("resultado", notasDAO.actualizarNota(id, alumno, asignatura, nota, fecha, model));	
 
 		return "vistas/notas/actualizarNotas";
 	}
