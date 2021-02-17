@@ -14,12 +14,12 @@
 </head>
 <body>
 	<h2>Gestión de colegio</h2>
-	<%@include file="/menu.html"%>
+	<%@include file="../../menu.html"%>
 	
 	<div class="container">
 	<h2>Borrar nota</h2>
 		<div class="form">
-			<form action="http://localhost:8080/colegio/formularioborrarnota" method="post">
+			<form action="http://localhost:8080/colegio/formularioborrarnotas" method="post">
 				<label for="nombre">Nombre Alumno</label> 
 				<input type="text" id="nombre"	name="nombre"> 
 				<label for="asignatura">Asignatura</label> 
