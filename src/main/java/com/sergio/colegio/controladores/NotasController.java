@@ -29,12 +29,6 @@ public class NotasController {
 	@Autowired
 	private NotasDAO notasDAO;
 	
-	@Autowired
-	private AlumnoDAO alumnoDAO;
-	
-	@Autowired
-	private AsignaturaDAO asignaturaDAO;
-	
 	
 	
 	@GetMapping (value = "listadonotas")
@@ -68,7 +62,7 @@ public class NotasController {
 			@RequestParam(value = "nota", required = false) Double nota,
 			@RequestParam(value = "fecha", required = false) String fecha, ModelMap model) {
 		
-		model.addAttribute("resultado", asignaturaDAO.insertarasignatura(alumno, fecha, asignatura, nota));
+		model.addAttribute("resultado", notasDAO.insertarNota(alumno, asignatura, nota, fecha));
 		
 		return "vistas/notas/insertarNotas";
 	}
