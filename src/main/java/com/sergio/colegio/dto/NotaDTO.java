@@ -53,6 +53,16 @@ public class NotaDTO {
 		this.fecha = fecha;
 	}
 
+	
+	
+	public NotaDTO(Integer idAlumno, Integer idAsignatura, Double nota, String fecha) {
+		super();
+		this.idAlumno = idAlumno;
+		this.idAsignatura = idAsignatura;
+		this.nota = nota;
+		this.fecha = fecha;
+	}
+
 	/**
 	 * 
 	 */
